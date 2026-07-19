@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabMaster Pro - 欢迎使用</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      min-height: 100vh;
+      color: rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+    }
+
+    .welcome-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .background-glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.1) 50%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .steps-indicator {
+      position: absolute;
+      top: 40px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 300ms;
+    }
+
+    .step-dot.active {
+      width: 10px;
+      height: 10px;
+      background: #3b82f6;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .illustration {
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .orb-preview {
+      width: 120px;
+      height: 120px;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 4px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .orb-count {
+      font-size: 32px;
+      font-weight: 700;
+      color: #3b82f6;
+    }
+
+    .panel-preview {
+      position: absolute;
+      right: -200px;
+      top: 50%;
+      transform: translateY(-50%) scale(0.8);
+      width: 320px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px;
+      opacity: 0;
+      animation: slideIn 0.5s ease-out 0.5s forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-50%) translateX(20px) scale(0.8); }
+      to { opacity: 1; transform: translateY(-50%) translateX(0) scale(0.8); }
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .search-icon {
+      width: 14px;
+      height: 14px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .search-input {
+      flex: 1;
+      height: 28px;
+      padding: 0 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .tabs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .tab-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 8px;
+    }
+
+    .tab-favicon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+
+    .tab-title {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 48px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(59, 130, 246, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      color: #3b82f6;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(to top, rgba(10, 10, 15, 0.95), transparent);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .btn {
+      height: 48px;
+      padding: 0 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 200ms;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .skip-link {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 200ms;
+    }
+
+    .skip-link:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    @media (max-height: 700px) {
+      .illustration {
+        height: 200px;
+      }
+      
+      .orb-preview {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .panel-preview {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .bottom-bar {
+        padding: 0 20px;
+      }
+      
+      .btn {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-container">
+    <div class="background-glow"></div>
+    
+    <div class="steps-indicator">
+      <div class="step-dot active" data-step="1"></div>
+      <div class="step-dot" data-step="2"></div>
+      <div class="step-dot" data-step="3"></div>
+      <div class="step-dot" data-step="4"></div>
+    </div>
+
+    <div class="content">
+      <div class="illustration">
+        <div class="orb-preview">
+          <span class="orb-count">8</span>
+        </div>
+        <div class="panel-preview">
+          <div class="panel-header">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="search-input" placeholder="搜索标签...">
+          </div>
+          <div class="tabs-grid">
+            <div class="tab-card">
+              <img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=feishu.cn" alt="">
+              <span class="tab-title">产品需求文档</span>
+            </div>
+            <div class="tab-card">
+              <img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=figma.com" alt="">
+              <span class="tab-title">UI设计稿</span>
+            </div>
+            <div class="tab-card">
+              <img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=chat.openai.com" alt="">
+              <span class="tab-title">ChatGPT</span>
+            </div>
+            <div class="tab-card">
+              <img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=github.com" alt="">
+              <span class="tab-title">GitHub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h1>TabMaster Pro</h1>
+      <p>智能标签页管理助手，让您的浏览器标签井井有条。悬停悬浮球即可快速预览所有标签，支持智能分类和自动去重。</p>
+
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="feature-title">快速预览</div>
+          <div class="feature-desc">300ms悬停唤起面板，秒级定位目标标签</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 3H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h20a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z"></path>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </div>
+          <div class="feature-title">智能去重</div>
+          <div class="feature-desc">自动检测重复标签，释放浏览器内存</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="4 10 10 10 10 4"></polyline>
+            </svg>
+          </div>
+          <div class="feature-title">分类管理</div>
+          <div class="feature-desc">按项目自动分组，快速筛选特定类别</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="skip-link" id="skip-btn">跳过引导</div>
+      <button class="btn btn-primary" id="next-btn">开始使用</button>
+    </div>
+  </div>
+
+  <script src="welcome.js"></script>
+</body>
+</html>

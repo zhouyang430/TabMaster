@@ -1,0 +1,422 @@
+:root {
+  --nothing-black: #0a0a0a;
+  --nothing-white: #ffffff;
+  --nothing-pink: #ff00ff;
+  --nothing-neon-pink: #ff6b9d;
+  --nothing-neon-glow: rgba(255, 107, 157, 0.5);
+}
+
+#tabmaster-orb {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2147483647;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 40px rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#tabmaster-orb:hover {
+  transform: scale(1.1);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 60px rgba(255, 255, 255, 0.08);
+}
+
+#tabmaster-orb.active {
+  animation: glyphPulse 2s ease-in-out infinite;
+}
+
+@keyframes glyphPulse {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 0 40px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 0 80px rgba(255, 255, 255, 0.12);
+  }
+}
+
+.tabmaster-orb-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabmaster-orb-count {
+  font-family: 'Courier New', 'Consolas', 'SF Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(100, 100, 100, 0.95);
+  letter-spacing: -0.1em;
+}
+
+#tabmaster-panel {
+  position: fixed;
+  width: 420px;
+  max-height: 550px;
+  background: rgba(10, 10, 10, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 0 40px rgba(255, 255, 255, 0.02);
+  z-index: 2147483646;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#tabmaster-panel.hidden {
+  opacity: 0;
+  transform: scale(0.96) translateY(8px);
+  pointer-events: none;
+}
+
+.tabmaster-panel-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+}
+
+.tabmaster-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tabmaster-search-icon {
+  position: absolute;
+  left: 12px;
+  width: 14px;
+  height: 14px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.tabmaster-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 38px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-weight: 500;
+  outline: none;
+  transition: all 120ms;
+  letter-spacing: -0.02em;
+}
+
+.tabmaster-search-input:focus {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tabmaster-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.tabmaster-panel-body {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.tabmaster-panel-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tabmaster-panel-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tabmaster-panel-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+.tabmaster-domain-group {
+  margin-bottom: 16px;
+}
+
+.tabmaster-domain-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 120ms;
+  background: rgba(255, 255, 255, 0.015);
+  position: relative;
+}
+
+.tabmaster-domain-header:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tabmaster-domain-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tabmaster-domain-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  font-size: 16px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.tabmaster-domain-name {
+  font-size: 14px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-shadow: 
+    0 0 4px rgba(255, 255, 255, 0.3),
+    0 0 8px rgba(255, 255, 255, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+}
+
+.tabmaster-domain-count {
+  font-size: 11px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  color: #ff6b9d;
+  background: rgba(255, 107, 157, 0.12);
+  padding: 3px 8px;
+  border-radius: 10px;
+  letter-spacing: -0.05em;
+  font-weight: 700;
+  box-shadow: 
+    0 0 8px rgba(255, 107, 157, 0.4),
+    0 0 16px rgba(255, 107, 157, 0.2),
+    inset 0 0 8px rgba(255, 107, 157, 0.1);
+  position: absolute;
+  right: 12px;
+}
+
+.tabmaster-domain-close {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 100ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabmaster-domain-header:hover .tabmaster-domain-close {
+  opacity: 1;
+}
+
+.tabmaster-domain-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tabmaster-tabs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 8px;
+}
+
+.tabmaster-tab-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 80ms;
+  position: relative;
+  background: rgba(255, 255, 255, 0.008);
+}
+
+.tabmaster-tab-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(2px);
+}
+
+.tabmaster-tab-item.active {
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 2px solid rgba(255, 107, 157, 0.6);
+}
+
+.tabmaster-tab-favicon {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.tabmaster-tab-title {
+  flex: 1;
+  font-size: 12px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+}
+
+.tabmaster-tab-close {
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 80ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabmaster-tab-item:hover .tabmaster-tab-close {
+  opacity: 1;
+}
+
+.tabmaster-tab-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tabmaster-empty-state {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.tabmaster-empty-text {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  letter-spacing: 0.05em;
+}
+
+.tabmaster-panel-footer {
+  padding: 8px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  gap: 8px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+}
+
+.tabmaster-action-btn {
+  flex: 1;
+  height: 28px;
+  border: none;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 100ms;
+  letter-spacing: 0.03em;
+}
+
+.tabmaster-action-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.tabmaster-action-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+}
+
+#tabmaster-toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  background: rgba(10, 10, 10, 0.97);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  letter-spacing: 0.03em;
+  z-index: 2147483647;
+  transition: all 150ms;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+#tabmaster-toast.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-8px);
+  pointer-events: none;
+}
+
+@media (max-width: 460px) {
+  #tabmaster-panel {
+    width: calc(100vw - 16px);
+    left: 8px !important;
+    right: 8px !important;
+    border-radius: 14px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tabmaster-tab-item {
+  animation: fadeInUp 0.15s ease-out;
+}

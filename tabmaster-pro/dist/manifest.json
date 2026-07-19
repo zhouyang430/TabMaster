@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "TabMaster Pro",
+  "version": "1.0.0",
+  "description": "智能标签页管理插件，通过悬浮球快速访问、智能分类和自动去重提升工作效率",
+  "permissions": ["tabs", "storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["*://chrome.google.com/*", "*://*.chromeextensions.club/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "toggle-panel": {
+      "suggested_key": {
+        "default": "Alt+Shift+T",
+        "mac": "Option+Shift+T"
+      },
+      "description": "唤起/关闭预览面板"
+    },
+    "deduplicate": {
+      "suggested_key": {
+        "default": "Alt+Shift+D",
+        "mac": "Option+Shift+D"
+      },
+      "description": "立即执行去重扫描"
+    }
+  }
+}

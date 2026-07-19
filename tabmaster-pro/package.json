@@ -1,0 +1,12 @@
+{
+  "name": "tabmaster-pro",
+  "version": "1.0.0",
+  "description": "TabMaster Pro - 智能标签页管理插件",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r icons *.html *.js *.css *.json dist/",
+    "dev": "echo 'Development mode - files are served directly'"
+  },
+  "keywords": ["chrome-extension", "tabs", "productivity"],
+  "author": "TabMaster Team",
+  "license": "MIT"
+}
